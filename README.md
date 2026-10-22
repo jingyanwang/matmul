@@ -1,6 +1,6 @@
 # Matrix Multiplier
 
-Computes **A·B + C** on an FPGA and reduces the result to a single 32-bit number, where A is 128×128 (8-bit), B is 128×1 (8-bit) and C is 128×1 (16-bit). It uses 32 parallel multipliers and finishes in **520 cycles**:
+Computes **A·B + C** on an FPGA and reduces the result to a single 32-bit number, where A is 128×128 (8-bit), B is 128×1 (8-bit) and C is 128×1 (16-bit). It uses 32 parallel multipliers, meets timing at 100 MHz, and finishes in **520 cycles**:
 
 - 512 for the multiplies (the speed-of-light limit at 32 multiplies per cycle)
 - 2 to fill the pipeline
