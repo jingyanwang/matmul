@@ -54,7 +54,7 @@ module compute
   logic [1:0] row;
   logic [6:0] col;
   logic [2:0] countAdd;
-  logic computing, enAccum, enAdd, cDone, done, adding, lastAdd;
+  logic computing, enAccum, enAdd, cDone, done, doneQ, adding, lastAdd;
 
   fsm fsm(.clk(clk), .reset(reset), .isLastAddr(isLastAddr),
    .computing(computing), .done(done), .adding(adding), .lastAdd(lastAdd),
@@ -92,8 +92,10 @@ module compute
   always_ff @(posedge clk) begin
     if (reset) begin
       clockCount <= 32'd0;
-    end else if (!done) begin
-      clockCount <= clockCount + 32'd1;
+      doneQ <= 1'b0;
+    end else begin
+      doneQ <= done;
+      if (!doneQ) clockCount <= clockCount + 32'd1;
     end
   end
 
